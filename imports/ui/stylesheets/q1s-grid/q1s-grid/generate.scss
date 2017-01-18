@@ -1,0 +1,170 @@
+@mixin generateGrid($grid-name, $column-count, $grid-width, $baseFontSize: 12, $column-margin: 0, $column-padding: 0, $grid-type: fluid, $push-pull: true, $prefix-suffix: false){
+  /////
+  // These forumulae calculate grid column width.  Not necesarry to change these or anything below.
+  $column-width-pixels: ($grid-width - ($column-margin * ($column-count - 1))) / $column-count;
+  $column-width-percentage: (($grid-width - ($column-margin * ($column-count - 1))) / $column-count) / $grid-width * 100%;
+  $column-margin-percentage: $column-margin / $grid-width * 100%;
+  $column-width-relative: $column-width-pixels / $baseFontSize;
+  $column-margin-relative: $column-margin / $baseFontSize;
+  .row {
+    float: left;
+    clear: left;
+    width: 100%;
+  }
+
+  .row-centered{
+    text-align: center;
+  }
+
+  .wrapper {
+    @if ($grid-type == "fixed"){
+      width: $grid-width + px;
+    }
+    @if ($grid-type == "fluid"){
+      width: 100%;
+      max-width: $grid-width + px;
+    }
+    @if ($grid-type == "elastic"){
+      font-size: $baseFontSize;
+    }
+  }
+
+  .#{$grid-name} {
+    overflow: hidden;
+  }
+
+  .#{$grid-name}-col + .#{$grid-name}-col {
+    @if ($grid-type == 'fluid') {
+      margin-left: $column-margin-percentage;
+    }
+    @elseif ($grid-type == 'fixed'){
+      margin-left: $column-margin + px;
+    }
+    @elseif ($grid-type == 'elastic'){
+      margin-left: $column-margin-relative + em;
+    }
+  }
+
+  .#{$grid-name}-col-0 {
+    display: none;
+  }
+
+  .#{$grid-name}-col-1 {
+    @if ($grid-type == 'fluid') {
+      width: $column-width-percentage;
+    }
+    @elseif ($grid-type == 'fixed'){
+      width: $column-width-pixels + px;
+    }
+    @elseif ($grid-type == 'elastic'){
+      width: $column-width-relative + em;
+    }
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  @for $i from 2 through ($column-count - 1){
+    .#{$grid-name}-col-#{$i}{
+      @if ($grid-type == 'fluid') {
+        width: $column-width-percentage * $i + $column-margin-percentage * ($i - 1);
+      }
+      @elseif ($grid-type == 'fixed'){
+        width: ($column-width-pixels * $i) + ($column-margin * ($i - 1)) + px;
+      }
+      @elseif ($grid-type == 'elastic'){
+        width: $column-width-relative * $i + ($column-margin-relative * ($i - 1)) + em;
+      }
+      display: inline-block;
+      position: relative;
+      float: left;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+  }
+
+  .#{$grid-name}-col-#{$column-count}{
+    @if ($grid-type == 'fluid') {
+      width: 100%;
+    }
+    @elseif ($grid-type == 'fixed'){
+      width: $grid-width + px
+    }
+    @elseif ($grid-type == 'elastic'){
+      width: $grid-width / $baseFontSize + em;
+    }
+    display: inline-block;
+    position: relative;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+
+  //Push and Pull classes
+  @if $push-pull{
+    @for $i from 1 through ($column-count - 1){
+      .#{$grid-name}-col-push-#{$i}-#{$column-count}{
+        @if ($grid-type == 'fluid') {
+          left : $column-width-percentage * $i + $column-margin-percentage * $i;
+        }
+        @elseif ($grid-type == 'fixed'){
+          left: $column-width-pixels * $i + $column-margin * $i + px;
+        }
+        @elseif ($grid-type == 'elastic'){
+          left: $column-width-relative * $i + $column-margin-relative * $i + em;
+        }
+      }
+    }
+    @for $i from 1 through ($column-count - 1){
+      .#{$grid-name}-col-pull-#{$i}-#{$column-count}{
+        @if ($grid-type == 'fluid') {
+          left : -1 * $column-width-percentage * $i + $column-margin-percentage * $i;
+        }
+        @elseif ($grid-type == 'fixed'){
+          left : -1 * ($column-width-pixels * $i + $column-margin * $i) + px;
+        }
+        @elseif ($grid-type == 'elastic'){
+          left: -1 * ($column-width-relative * $i + $column-margin-relative * $i) + em;
+        }
+      }
+    }
+  }
+
+  // Prefix and Suffix Classes
+  @if $prefix-suffix{
+    @for $i from 1 through ($column-count - 1){
+      .#{$grid-name}-column_prefix#{$i}of#{$column-count}{
+        @if ($grid-type=='fluid') {
+          margin-left : $column-width-percentage * $i + $column-margin-percentage * $i;
+        }
+        @elseif ($grid-type=='fixed') {
+          margin-left: $column-width-pixels * $i + $column-margin * $i + px;
+        }
+        @elseif ($grid-type == 'elastic'){
+          margin-left: $column-width-relative * $i + $column-margin-relative * $i + em;
+        }
+      }
+    }
+    @for $i from 1 through ($column-count - 1){
+      .#{$grid-name}-column_suffix#{$i}of#{$column-count}{
+        @if ($grid-type=='fluid') {
+          margin-left : -1 * ($column-width-percentage * $i + $column-margin-percentage * $i);
+        }
+        @elseif ($grid-type=='fixed') {
+          margin-left: -1 * ($column-width-pixels * $i + $column-margin * $i) + px;
+        }
+        @elseif ($grid-type == 'elastic'){
+          margin-left: -1 * ($column-width-relative * $i + $column-margin-relative * $i) + em;
+        }
+      }
+    }
+  }
+  .#{$grid-name}-col-centered {
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+}

@@ -1,0 +1,33 @@
+/* An SCC constructor to generate a class based system for handling 2D elements in a 2.5D space */
+@import '../functions/getLowestKey';
+@import '../functions/returnValueForLevel';
+@import '../functions/getMinMax';
+
+@mixin zIndex ($classPrefix, $levels, $shadow-color, $max, $sudo-class) {
+  $xOffSet: null;
+  $yOffSet: null;
+  $blur: null;
+  $alpha: null;
+  @if map-has-key($max, 'xOffSet') {
+    $xOffSet: getMinMax((max: map-get($max, 'xOffSet'), min: 0));
+  }
+  @if map-has-key($max, 'yOffSet') {
+    $yOffSet: getMinMax((max: map-get($max, 'yOffSet'), min: 0));
+  }
+  @if map-has-key($max, 'blur') {
+    $blur: getMinMax((max: map-get($max, 'blur'), min: 0));
+  }
+  @if map-has-key($max, 'alpha') {
+    $alpha: getMinMax((max: map-get($max, 'alpha'), min: 0));
+  }
+  @for $i from 0 through $levels {
+    $x: returnValueForLevel($xOffSet, $i, $levels);
+    $y: returnValueForLevel($yOffSet, $i, $levels);
+    $b: returnValueForLevel($blur, $i, $levels);
+    $a: returnValueForLevel($alpha, $i, $levels);
+    .#{$classPrefix}-#{$i}#{$sudo-class} {
+      box-shadow: $x $y $b rgba($shadow-color, $a);
+      transition: all 0.5s ease;
+    }
+  }
+}

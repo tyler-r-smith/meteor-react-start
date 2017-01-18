@@ -1,0 +1,141 @@
+@import "boilerplate";
+@import "../variables";
+@import "../q1s-emph/text";
+@import "../q1s-z/z-index";
+@import "../q1s-grid/generate";
+@import "../q1s-form/blockForm";
+@import "../classes";
+
+@include generateGrid(lg, $lg-grid-col, $lg-grid-size)
+
+@media screen and (max-width: $md-grid-size+"px"){
+  @include generateGrid(md, $md-grid-col, $md-grid-size)
+}
+
+@media screen and (max-width: $sm-grid-size+"px"){
+  @include generateGrid(sm, $sm-grid-col, $sm-grid-size)
+}
+
+@include zIndex ("z", 15, $z-static, (
+  xOffSet: $max-font-size / 2,
+  yOffSet: $max-font-size / 2,
+  blur: $min-font-size * 3,
+  alpha: 1
+), "")
+
+$z-focus-diff: (($max-font-size / 2) - ($min-font-size / 2)) / 3;
+@include zIndex ("z", 15, $z-focus, (
+        xOffSet: $max-font-size / 4,
+        yOffSet: $max-font-size / 4,
+        blur: $min-font-size * 1.5,
+        alpha: 1
+), ":hover")
+
+@include textEmph(
+  "text",
+  (max: $max-font-size, min: $min-font-size),
+  (max: $max-font-weight, min: $min-font-weight),
+  (max: $max-padding, min: $min-padding),
+  (4: $font-header, 2: $font-body, 1: $font-sub),
+  (4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+  (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+  $number-of-text-emph
+);
+
+@include textEmph(
+  "hover",
+  (max: $max-font-size, min: $min-font-size),
+  (max: $max-font-weight, min: $min-font-weight),
+  (max: $max-padding, min: $min-padding),
+  (4: $font-header, 2: $font-body, 1: $font-sub),
+  (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+  (7: $font-main-color, 4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+  $number-of-text-emph,
+  ":hover"
+);
+@include textEmph(
+    "",
+    (max: $max-font-size, min: $min-font-size),
+    (max: $max-font-weight, min: $min-font-weight),
+    (max: $max-padding, min: $min-padding),
+    (1: ""),
+    (4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+    (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+    $number-of-text-emph
+);
+@include textEmph(
+    "h",
+    (max: $max-font-size, min: $min-font-size),
+    (max: $max-font-weight, min: $min-font-weight),
+    (max: $max-padding, min: $min-padding),
+    (1: ""),
+    (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+    (4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+    $number-of-text-emph,
+    ":hover"
+);
+
+@include textEmph(
+  "no-font",
+  (max: $max-font-size, min: $min-font-size),
+  (max: $max-font-weight, min: $min-font-weight),
+  (max: $max-padding, min: $min-padding),
+  (1: ""),
+  (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+  (7: $font-main-color, 4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+  $number-of-text-emph,
+  ":hover"
+);
+@include textEmph(
+  "selected.no-font",
+  (max: $max-font-size, min: $min-font-size),
+  (max: $max-font-weight, min: $min-font-weight),
+  (max: $max-padding, min: $min-padding),
+  (1: ""),
+  (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+  (7: $font-main-color, 4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+  $number-of-text-emph
+);
+
+@include textEmph(
+  "selected.hover",
+  (max: $max-font-size, min: $min-font-size),
+  (max: $max-font-weight, min: $min-font-weight),
+  (max: $max-padding, min: $min-padding),
+  (4: $font-header, 2: $font-body, 1: $font-sub),
+  (7: $header-bg-color, 5:$main-bg-color, 4: $header-bg-color, 2: $main-bg-color, 1: $sub-bg-color),
+  (7: $font-main-color, 4:$font-header-color, 2: $font-main-color, 1: $font-sub-color),
+  $number-of-text-emph
+);
+
+@include textEmph(
+  "btn",
+  (max: $max-font-size, min: $min-font-size),
+  (max: $max-font-weight, min: $min-font-weight),
+  (max: $btn-max-padding, min: $btn-min-padding),
+  (1: $font-body),
+  (1: $btn-font-color),
+  (1: $btn-background),
+  2
+);
+
+@include textEmph(
+    "btn",
+    (max: $max-font-size, min: $min-font-size),
+    (max: $max-font-weight, min: $min-font-weight),
+    (max: $btn-max-padding, min: $btn-min-padding),
+    (1: $font-body),
+    (1: $btn-font-hover-color),
+    (1: $btn-background-hover),
+    2,
+    ":hover"
+);
+
+
+@include blockForm("blockForm", $btn-background, $font-fail-color, (
+  input: ".text-f2-p4",
+  label: ".text-f3-p1",
+  helpertext: ".text-f1-p1",
+  submit: ".text-f3-p2",
+  p: ".text-f4-p2",
+));

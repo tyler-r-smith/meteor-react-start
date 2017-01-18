@@ -1,0 +1,16 @@
+@function getMinMax($variable) {
+  $max-size: null;
+  $min-size: null;
+  @if map-has-key($variable, "max") {
+    $max-size: map-get($variable, "max");
+    @if map-has-key($variable, "min") {
+      $min-size: map-get($variable, "min");
+    } @else {
+      $min-size: 0;
+    }
+  } @else {
+    $max-size: $variable;
+    $min-size: $variable;
+  }
+  @return (min: $min-size, max: $max-size)
+}

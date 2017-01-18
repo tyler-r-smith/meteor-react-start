@@ -1,0 +1,63 @@
+@mixin blockForm($className, $success-color, $fail-color, $extensionMap: ()) {
+  .#{$className} div {
+    @if map-has-key($extensionMap, "div") {
+      @extend #{map-get($extensionMap, "div")};
+    }
+    width: 100%;
+    margin-top: 8px;
+    height: auto;
+    float: left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$className} input {
+    @if map-has-key($extensionMap, "input") {
+      @extend #{map-get($extensionMap, "input")};
+    }
+    outline: none;
+    border: none;
+    width: 100%;
+    float: left;
+    order: 2;
+  }
+
+  .#{$className} label {
+    @if map-has-key($extensionMap, "label") {
+      @extend #{map-get($extensionMap, "label")};
+    }
+    order: 1;
+    text-align: left;
+  }
+
+  .#{$className} helpertext {
+    @if map-has-key($extensionMap, "helpertext") {
+      @extend #{map-get($extensionMap, "helpertext")};
+    }
+    order: 3;
+    color: $fail-color;
+  }
+
+  .#{$className} input[type='submit'] {
+    @if map-has-key($extensionMap, "submit") {
+      @extend #{map-get($extensionMap, "submit")};
+    }
+    background-color: $success-color;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .#{$className} input[type='submit']:hover {
+      $hoverColor: lighten($success-color, 20%);
+      background-color: $hoverColor;
+  }
+  .#{$className} p {
+    @if map-has-key($extensionMap, "p") {
+      @extend #{map-get($extensionMap, "p")};
+    }
+    margin: 0;
+    text-align: left;
+  }
+
+}

@@ -1,0 +1,14 @@
+@import "polyfills/default";
+
+#header {
+    margin-bottom: 5px;
+}
+
+.separate-inputs text-input {
+    @extend .lg-col-12;
+    @extend .text-f2-p0;
+    @extend .z-1;
+    float: left;
+    display: block;
+    margin: 2px auto;
+}

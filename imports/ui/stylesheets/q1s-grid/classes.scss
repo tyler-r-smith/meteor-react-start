@@ -1,0 +1,13 @@
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.vertical-center-children {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

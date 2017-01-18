@@ -1,0 +1,44 @@
+$font-header: "serif", sans-serif;
+$font-body: "prestige-elite-std", monospace;
+$font-sub: "mr-eaves-modern", sans-serif;
+
+$font-main-color: #888989;
+$font-header-color: #b5b6b6;
+$font-sub-color: #e1e2e2;
+$font-success-color: #003871;
+$font-warning-color: #f6922c;
+$font-fail-color: #f62727;
+
+$max-font-size: 2.6em;
+$min-font-size: 0.8em;
+
+$max-font-weight: 300;
+$min-font-weight: 300;
+
+$z-static: $font-main-color;
+$z-focus: $font-success-color;
+$main-bg-color: none;
+$header-bg-color: #313335;
+$sub-bg-color: none;
+
+$max-padding: 20px;
+$min-padding: 0;
+
+$number-of-text-emph: 10;
+
+$btn-font-color: $font-success-color;
+$btn-font-hover-color: $font-main-color;
+
+$btn-background: $font-header-color;
+$btn-background-hover: rgb(43, 29, 46);
+
+$btn-max-padding: 30px;
+$btn-min-padding: 10px;
+
+$lg-grid-size: 1200;
+$lg-grid-col: 12;
+$md-grid-size: 750;
+$md-grid-col: 8;
+$sm-grid-size: 400;
+$sm-grid-col: 4;
+

@@ -1,0 +1,40 @@
+@mixin textEmph ($classPrefix, $font-size, $font-weight, $padding, $font-map, $color-map, $background-color-map, $level, $sudo-class:"") {
+  $font-size-map: getMinMax($font-size);
+  $font-weight-map: getMinMax($font-weight);
+  $padding-map: getMinMax($padding);
+  @for $i from 1 through $level {
+    $color: getLowestKey($color-map, $i);
+    @if ($color == 'none') {
+      $color: white;
+    }
+    %f#{$i}#{$classPrefix}#{$sudo-class} {
+      font-size: returnValueForLevel($font-size-map, $i, $level);
+      $fontFamily: getLowestKey($font-map, $i);
+      @if ($fontFamily != "") {
+        font-family: $fontFamily;
+      }
+      font-weight: returnValueForLevel($font-weight-map, $i, $level);
+      color: $color;
+      background-color: getLowestKey($background-color-map, $i);
+      box-sizing: border-box;
+    }
+  }
+  @for $i from 0 through $level {
+    %p#{$i}#{$classPrefix}#{$sudo-class} {
+      padding: returnValueForLevel($padding-map, $i, $level);
+    }
+    @for $n from 1 through $level {
+      $class: null;
+      @if ($sudo-class ) {
+        $class: #{$classPrefix}-f#{$n}-p#{$i}#{$sudo-class} ;
+      }
+      @else {
+        $class: #{$classPrefix}-f#{$n}-p#{$i};
+      }
+      .#{$class}{
+        @extend %f#{$n}#{$classPrefix}#{$sudo-class};
+        @extend %p#{$i}#{$classPrefix}#{$sudo-class};
+      }
+    }
+  }
+}

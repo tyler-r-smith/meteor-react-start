@@ -1,0 +1,11 @@
+@function returnValueForLevel ($map, $i, $levels) {
+  $return: null;
+  @if ($i == 0) {
+    $return: 0;
+  } @else {
+    $diff: (map-get($map, "max") - map-get($map, "min"));
+    $less: (($diff / $levels) * ($i - 1));
+    $return: (map-get($map, "min") + $less);
+  }
+  @return $return
+}
