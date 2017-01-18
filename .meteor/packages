@@ -19,11 +19,12 @@ ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
 
 kadira:flow-router      # FlowRouter is a very simple router for Meteor
 kadira:blaze-layout     # Layout manager for blaze (works well with FlowRouter)
-less@2.7.8                    # Leaner CSS language
-
+kadira:react-layout     #Layout manager for react to be used with FlowRouter
 
 practicalmeteor:mocha             # A package for writing and running your meteor app and package tests with mocha
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
-react
-dispatch:mocha-phantomjs
-fourseven:scss
+dispatch:mocha-phantomjs          # CLI testing
+fourseven:scss                    #SCSS Complier
+accounts-password                 #accounts package
+accounts-ui
+react-meteor-data
